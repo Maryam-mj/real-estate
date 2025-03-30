@@ -1,0 +1,26 @@
+body{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.601), rgba(0, 0, 0, 00.601)), 
+                      url("image/intro-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.property-grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 60px;
+    padding:10px 30px ;
+}
+h2{
+    color: rgb(4, 4, 62);
+    font-style: italic;
+
+}
+.property{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 60px;
+    padding:10px 30px ;
+}

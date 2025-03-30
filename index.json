@@ -1,0 +1,24 @@
+{
+      "properties":[
+        {
+            "Location": "Nairobi",
+            "price": "$400",
+            "Details": "3 bed room",
+            "post":"image/apartment3.jpg"
+        },
+        {
+            "Location": "Nairobi",
+            "price": "$300",
+            "Details": "2 bed room",
+             "post":"image/apartment3.jpg"
+        },
+        {
+            "Location": "Nairobi",
+            "price": "$450",
+            "Details": "3 bed room",
+             "post":"image/apartment3.jpg"
+        }
+      ]
+
+}
+
