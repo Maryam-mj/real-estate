@@ -1,24 +1,28 @@
 {
-      "properties":[
-        {
-            "Location": "Nairobi",
-            "price": "$400",
-            "Details": "3 bed room",
-            "post":"image/apartment3.jpg"
-        },
-        {
-            "Location": "Nairobi",
-            "price": "$300",
-            "Details": "2 bed room",
-             "post":"image/apartment3.jpg"
-        },
-        {
-            "Location": "Nairobi",
-            "price": "$450",
-            "Details": "3 bed room",
-             "post":"image/apartment3.jpg"
-        }
-      ]
-
+  "properties": [
+    {
+      "id": "1",
+      "Location": "may",
+      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg",
+      "Plot": "3-bedroom"
+    },
+    {
+      "id": "",
+      "Location": "Nairobi",
+      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg?ga=GA1.1.753859842.1740568710&semt=ais_hybrid",
+      "Plot": "3-bedroom"
+    },
+    {
+      "id": "",
+      "Location": "maryam",
+      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg",
+      "Plot": "3-bedroom"
+    },
+    {
+      "id": "4",
+      "Location": "Nairobi",
+      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg?ga=GA1.1.753859842.1740568710&semt=ais_hybrid",
+      "Plot": "3-bedroom"
+    }
+  ]
 }
-

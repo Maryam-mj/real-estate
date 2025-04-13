@@ -1,0 +1,29 @@
+.bg-blue-950 {
+    background-color: #091c5b ; 
+    color: white;
+    padding: 10px 200px;
+  }
+  
+  .btn{
+    background-color: #172554;
+  }
+  
+  .btn-blue-950 {
+    background-color: #172554;
+    color: white;
+    border: none;
+  }
+  
+  .btn-blue-950:hover {
+    background-color: #0f1e40; 
+    color: white;
+  }
+  
+  
+  form .form-label {
+    font-weight: 500;
+  }
+  
+  .card-title {
+    color: #172554;
+  }
