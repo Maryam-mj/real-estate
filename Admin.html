@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel - Messages</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <h1 class="text-3xl font-bold mb-6 text-center">Admin Panel: User Messages</h1>
+
+  <div id="messageContainer" class="space-y-4 max-w-3xl mx-auto">
+    <!-- Messages will be injected here -->
+  </div>
+
+
+  
+<script src="index.js"></script>
+ <script>
+  // Fetch and display all messages submitted by users
+  fetch("http://localhost:3000/messages")
+    .then(res => res.json())
+    .then(messages => {
+      const container = document.getElementById("messageContainer");
+
+      if (messages.length === 0) {
+        container.innerHTML = `<p class="text-center text-gray-500">No messages yet.</p>`;
+        return;
+      }
+
+      messages.forEach(msg => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-lg shadow p-4 relative";
+
+        card.innerHTML = `
+          <button class="absolute top-2 right-2 text-red-500 hover:text-red-700" title="Delete" data-id="${msg.id}">
+            🗑️
+          </button>
+          <p><strong class="text-gray-700">Name:</strong> ${msg.name}</p>
+          <p><strong class="text-gray-700">Email:</strong> <a href="mailto:${msg.email}" class="text-blue-600 underline">${msg.email}</a></p>
+          <p><strong class="text-gray-700">Message:</strong><br>${msg.message}</p>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Attach delete functionality
+      container.querySelectorAll("button[title='Delete']").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.getAttribute("data-id");
+          if (confirm("Delete this message?")) {
+            fetch(`http://localhost:3000/messages/${id}`, {
+              method: "DELETE"
+            })
+            .then(() => location.reload())
+            .catch(err => alert("Failed to delete message."));
+          }
+        });
+      });
+    })
+    .catch(err => {
+      console.error("Error fetching messages:", err);
+      document.getElementById("messageContainer").innerHTML = `<p class="text-red-600 text-center">Error loading messages.</p>`;
+    });
+</script>
+
+</body>
+</html>

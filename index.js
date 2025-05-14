@@ -1,115 +1,93 @@
-const API_URL = 'http://localhost:3000/properties';
-const propertyContainer = document.getElementById('property-container');
-const form = document.getElementById('propertyForm');
-const submitBtn = document.getElementById('submitBtn');
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
 
-let editMode = false;
-let editingId = null;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent default form reload
 
-// Fetch all properties
-async function fetchProperties() {
-  const res = await fetch(API_URL);
-  return await res.json();
-}
+    // Get values from form
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-// Save new property
-async function saveProperty(property) {
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(property)
+    // Basic validation
+    if (!name || !email || !message) {
+      alert("Please fill out all fields.");
+      return;
+    }
+
+    // Create object to send
+    const formData = {
+      name,
+      email,
+      message
+    };
+
+    // Send POST request to JSON server
+    fetch("http://localhost:3000/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to submit message.");
+        }
+        return res.json();
+      })
+      .then(() => {
+        alert("Message sent successfully!");
+        form.reset();         // Clear form
+        loadMessages();       // Refresh messages
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("There was a problem sending your message.");
+      });
   });
-  return await res.json();
-}
 
-// Update existing property
-async function updateProperty(id, property) {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(property)
-  });
-  return await res.json();
-}
+  // Load messages and add delete icon
+  function loadMessages() {
+    fetch("http://localhost:3000/messages")
+      .then(res => res.json())
+      .then(messages => {
+        const container = document.getElementById("adminMessages");
+        if (!container) return;
+        container.innerHTML = "";
 
-// Delete a property
-async function deleteProperty(id) {
-  if (confirm("Are you sure you want to delete this property?")) {
-    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    displayProperties();
-  }
-}
+        messages.forEach(msg => {
+          const div = document.createElement("div");
+          div.className = "flex justify-between items-start bg-white p-3 shadow mb-3 rounded";
 
-// Display all properties
-async function displayProperties() {
-  propertyContainer.innerHTML = '';
-  const properties = await fetchProperties();
+          div.innerHTML = `
+            <div>
+              <strong>${msg.name}</strong> <br>
+              <em>${msg.email}</em><br>
+              <p>${msg.message}</p>
+            </div>
+            <button class="text-red-500 delete-btn" data-id="${msg.id}" title="Delete">
+              <i class="bi bi-trash-fill text-xl"></i>
+            </button>
+          `;
 
-  properties.forEach(prop => {
-    const card = document.createElement('div');
-    card.className = 'col-md-4 mb-4';
-    card.innerHTML = `
-      <div class="card shadow-sm h-100">
-        <img src="${prop.Poster}" class="card-img-top" alt="Property Image" style="height: 200px; object-fit: cover;">
-        <div class="card-body">
-          <h5 class="card-title">${prop.Plot}</h5>
-          <p class="card-text"><strong>Location:</strong> ${prop.Location}</p>
-          <p class="card-text"><strong>ID:</strong> ${prop.id}</p>
-          <button class="btn btn-secondary btn-sm me-2" onclick="editProperty('${prop.id}')">Edit</button>
-          <button class="btn btn-sm text-white" style="background-color: #1e3a8a;" onclick="deleteProperty('${prop.id}')">Delete</button>
-        </div>
-      </div>
-    `;
-    propertyContainer.appendChild(card);
-  });
-}
+          container.appendChild(div);
+        });
 
-// Load property into form for editing
-async function editProperty(id) {
-  const properties = await fetchProperties();
-  const prop = properties.find(p => p.id === id);
-  
-  if (prop) {
-    document.getElementById('propertyid').value = prop.id;
-    document.getElementById('propertyLocation').value = prop.Location;
-    document.getElementById('propertyPoster').value = prop.Poster;
-    document.getElementById('propertyplot').value = prop.Plot;
-
-    editMode = true;
-    editingId = id;
-    submitBtn.textContent = "Update Property";
-    form.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-// Handle form submission
-form.addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const property = {
-    id: document.getElementById('propertyid').value,
-    Location: document.getElementById('propertyLocation').value.trim(),
-    Poster: document.getElementById('propertyPoster').value.trim(),
-    Plot: document.getElementById('propertyplot').value.trim()
-  };
-
-  if (!property.Location || !property.Poster || !property.Plot) {
-    alert("Please fill in all fields!");
-    return;
+        // Attach delete functionality
+        document.querySelectorAll(".delete-btn").forEach(btn => {
+          btn.addEventListener("click", function () {
+            const id = this.getAttribute("data-id");
+            if (confirm("Delete this message?")) {
+              fetch(`http://localhost:3000/messages/${id}`, {
+                method: "DELETE"
+              })
+              .then(() => loadMessages());
+            }
+          });
+        });
+      });
   }
 
-  if (editMode) {
-    await updateProperty(editingId, property);
-    editMode = false;
-    editingId = null;
-    submitBtn.textContent = "Add Property";
-  } else {
-    await saveProperty(property);
-  }
-
-  form.reset();
-  displayProperties();
+  loadMessages(); // Initial load
 });
-
-// Initial render
-displayProperties();

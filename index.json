@@ -1,28 +1,42 @@
 {
+  "messages": [
+    {
+      "id": "9d6a",
+      "name": "mariam",
+      "email": "mariamaliabdi12@gmail.com",
+      "message": "come on work"
+    }
+  ],
   "properties": [
     {
-      "id": "1",
-      "Location": "may",
-      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg",
-      "Plot": "3-bedroom"
+      "id": "97f5",
+      "location": "Nai",
+      "poster": "https://img.freepik.com/premium-photo/blue-house-with-number-8-front_1103290-38224.jpg",
+      "plot": "2-bed room"
     },
     {
-      "id": "",
-      "Location": "Nairobi",
-      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg?ga=GA1.1.753859842.1740568710&semt=ais_hybrid",
-      "Plot": "3-bedroom"
+      "id": "14de",
+      "location": "Mandera",
+      "poster": "https://img.freepik.com/premium-photo/contemporary-living-modern-modular-private-black-townhouses-residential_954894-100352.jpg",
+      "plot": "2-bed room"
     },
     {
-      "id": "",
-      "Location": "maryam",
-      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg",
-      "Plot": "3-bedroom"
+      "location": "Nai",
+      "poster": "https://i.pinimg.com/736x/9d/00/73/9d0073949c023359c7c5235498ecbe01.jpg",
+      "plot": "2-bed room",
+      "id": "983a"
     },
     {
-      "id": "4",
-      "Location": "Nairobi",
-      "Poster": "https://img.freepik.com/premium-photo/dwelling-urban-development-idea-sunset-cityscape-contemporary-residential-properties_117038-46077.jpg?ga=GA1.1.753859842.1740568710&semt=ais_hybrid",
-      "Plot": "3-bedroom"
+      "location": "Nairobi",
+      "poster": "https://img.freepik.com/premium-photo/contemporary-living-modern-modular-private-black-townhouses-residential_954894-100352.jpg",
+      "plot": "2-bed room",
+      "id": "7cd9"
+    },
+    {
+      "location": "nakuru",
+      "poster": "https://cdn.houseplansservices.com/content/h0rig2dbr8vsg0fcgqco7acmul/w991x660.jpg?v=9",
+      "plot": "2-bed room",
+      "id": "e95c"
     }
   ]
 }
